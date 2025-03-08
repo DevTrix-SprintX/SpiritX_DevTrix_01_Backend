@@ -6,7 +6,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public id!: number;
   public firstName!: string;
   public lastName!: string;
-  public email!: string;
+  public username!: string;
   public password!: string;
 
 
@@ -14,8 +14,9 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
     // no associations
   }
 
-  public async validPassword(password: string): Promise<boolean> {
-    return await bcrypt.compare(password, this.password);
+  public async validPassword(password: string,hashedPassword: string): Promise<boolean> {
+    console.log(`checking plain password: ${password} against hashed password ${hashedPassword}`);
+    return await bcrypt.compare(password, hashedPassword);
   }
 }
 
@@ -41,12 +42,14 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
           notEmpty: true,
         },
       },
-      email: {
+      username: {
         type: dataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
-          isEmail: true,
+          notEmpty: true,
+          isAlphanumeric: true,
+          len: [6, 20],
         },
       },
       password: {
