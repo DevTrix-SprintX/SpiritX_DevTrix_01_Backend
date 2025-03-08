@@ -30,7 +30,13 @@ const config: Config = {
         database: process.env.PGDATABASE || 'secure-connect',
         host: process.env.PGHOST || '127.0.0.1',
         dialect: 'postgres',
-        logging: false
+        logging: false,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
     },
     production: {
         username: process.env.PGUSER || '',
@@ -39,6 +45,12 @@ const config: Config = {
         host: process.env.PGHOST || '',
         dialect: 'postgres',
         logging: false,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
     }
 };
 
