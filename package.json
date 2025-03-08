@@ -10,14 +10,25 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.9",
+    "@types/sequelize": "^4.28.20",
     "express": "^4.21.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express-validator": "^7.2.1",
     "nodemon": "^3.1.9",
-    "secure-connect": "file:"
+    "pg": "^8.13.3",
+    "pg-hstore": "^2.3.4",
+    "secure-connect": "file:",
+    "sequelize": "^6.37.6",
+    "sequelize-cli": "^6.6.2"
   }
 }
