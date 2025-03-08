@@ -59,7 +59,7 @@ const loginUser = async (req: Request, res: Response) => {
         }
         
         // Generate JWT token
-        const token = generateToken(user.id, user.username);
+        const token = generateToken(user.dataValues.id, user.dataValues.username);
         
         // Return token and user info (excluding password)
         const { password: _, ...userWithoutPassword } = user;
