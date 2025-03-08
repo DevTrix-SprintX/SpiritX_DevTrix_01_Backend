@@ -81,22 +81,21 @@ const getUserProfile = async (req: Request, res: Response) => {
     try {
         const userId = req.user?.userId;
         const user = await authService.findById(userId);
-        
+
         if (user === null || user === undefined) {
             return res.status(404).json({ message: 'User not found', status: 404 });
         }
-        
+
         // Return user info without password
         const { password, ...userWithoutPassword } = user as Record<string, any>;
-        
+
         return res.status(200).json({
             status: 200,
-            user: userWithoutPassword
+            user: userWithoutPassword  // Make sure user data is under the 'user' property
         });
     } catch (error) {
         console.error('Error fetching user profile:', error);
         return res.status(500).json({ message: 'Server error', status: 500 });
     }
 };
-
 export { registerUser, loginUser, getUserProfile };
