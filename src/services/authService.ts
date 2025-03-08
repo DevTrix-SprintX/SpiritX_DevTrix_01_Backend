@@ -14,11 +14,11 @@ class AuthService {
 
   async checkPassword(username: string, password: string): Promise<boolean> {
     const user = await this.findByUsername(username);
-    const passwordHash = user.get().password;
-    console.log('user:', user.get());
     if (!user) {
       return false;
     }
+    const passwordHash = user.get().password;
+    console.log('user:', user.get());
     const isValid = await user.validPassword(password, passwordHash);
     return isValid;
   }
