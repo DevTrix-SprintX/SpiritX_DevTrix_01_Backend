@@ -14,8 +14,9 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
     // no associations
   }
 
-  public async validPassword(password: string): Promise<boolean> {
-    return await bcrypt.compare(password, this.password);
+  public async validPassword(password: string,hashedPassword: string): Promise<boolean> {
+    console.log(`checking plain password: ${password} against hashed password ${hashedPassword}`);
+    return await bcrypt.compare(password, hashedPassword);
   }
 }
 

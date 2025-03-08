@@ -14,10 +14,13 @@ class AuthService {
 
   async checkPassword(email: string, password: string): Promise<boolean> {
     const user = await this.findByEmail(email);
+    const passwordHash = user.get().password;
+    console.log('user:', user.get());
     if (!user) {
       return false;
     }
-    return await user.validPassword(password);
+    const isValid = await user.validPassword(password, passwordHash);
+    return isValid;
   }
 
   async create(userData: UserCreationAttributes): Promise<any> {
