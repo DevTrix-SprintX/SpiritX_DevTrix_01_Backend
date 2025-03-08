@@ -79,19 +79,18 @@ const loginUser = async (req: Request, res: Response) => {
 // Create a protected endpoint example
 const getUserProfile = async (req: Request, res: Response) => {
     try {
-        const userId = req.user?.userId;
-        const user = await authService.findById(userId);
+        const uname = req.user?.username;
+        const user = await authService.findByUsername(uname as string);
 
         if (user === null || user === undefined) {
             return res.status(404).json({ message: 'User not found', status: 404 });
         }
 
-        // Return user info without password
-        const { password, ...userWithoutPassword } = user as Record<string, any>;
+        const {username, firstName, lastName} = user.get();
 
         return res.status(200).json({
             status: 200,
-            user: userWithoutPassword  // Make sure user data is under the 'user' property
+            user: {username, firstName, lastName}  // Make sure user data is under the 'user' property
         });
     } catch (error) {
         console.error('Error fetching user profile:', error);
