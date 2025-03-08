@@ -22,11 +22,12 @@ if (!process.env.JWT_SECRET) {
 
 // Generate JWT token
 export const generateToken = (userId: string, username: string): string => {
-  return jwt.sign(
-    { userId, username },
-    JWT_SECRET,
-    { expiresIn: '24h' } // Token expires in 24 hours
-  );
+  const payload = {
+    userId,
+    username,
+  };
+
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
 };
 
 // Middleware to protect routes
