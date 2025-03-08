@@ -5,6 +5,9 @@ import db from '../modals';
 const { User } = db;
 
 class AuthService {
+  findById(userId: string | undefined) {
+      throw new Error('Method not implemented.');
+  }
 
   async findByUsername(username: string): Promise<any | null> {
     return User.findOne({
