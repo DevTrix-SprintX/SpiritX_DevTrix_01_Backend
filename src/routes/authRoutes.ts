@@ -1,16 +1,16 @@
 import express from 'express';
+import { loginUser, registerUser } from '../controllers/authController';
 
 const router = express.Router();
 
 router.post('/login', (req, res) => {
-    console.log('req.body:', req);
-    const { username, password } = req.body;
-    res.send(`Username: ${username}, Password: ${password}`);
+    console.log(`Login attempt with username: ${req.body?.email}`);
+    loginUser(req, res);
 });
 
 router.post('/register', (req, res) => {
-    const { username, password } = req.body.data;
-    res.send(`Username: ${username}, Password: ${password}`);
+    console.log(`Register attempt with email: ${req.body?.email}`);
+    registerUser(req, res);
 });
 
 export default router;

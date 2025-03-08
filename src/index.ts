@@ -12,12 +12,12 @@ import db from './modals';
         console.log('Database models synchronized.');
       }
 
-
+      app.use(express.json());
 
       app.get('/', (req: Request, res: Response) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200);
-        res.send({msg:'Hello World!', status: 200});
+        res.send({msg:'It\'s working!', status: 200});
     });
     
     app.use('/auth', authRoutes);
@@ -32,7 +32,6 @@ import db from './modals';
     }
   };
 
-  
 
 const app = express();
 const port = process.env.PORT || 3000;
