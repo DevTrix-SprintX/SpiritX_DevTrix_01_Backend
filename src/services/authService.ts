@@ -6,14 +6,14 @@ const { User } = db;
 
 class AuthService {
 
-  async findByEmail(email: string): Promise<any | null> {
+  async findByUsername(username: string): Promise<any | null> {
     return User.findOne({
-      where: { email } as WhereOptions,
+      where: { username } as WhereOptions,
     });
   }
 
-  async checkPassword(email: string, password: string): Promise<boolean> {
-    const user = await this.findByEmail(email);
+  async checkPassword(username: string, password: string): Promise<boolean> {
+    const user = await this.findByUsername(username);
     const passwordHash = user.get().password;
     console.log('user:', user.get());
     if (!user) {
@@ -28,7 +28,7 @@ class AuthService {
   }
 
   async update( userData: Partial<UserAttributes>): Promise<any | null> {
-    const user = await this.findByEmail(userData.email as string);
+    const user = await this.findByUsername(userData.username as string);
     
     if (!user) {
       return null;

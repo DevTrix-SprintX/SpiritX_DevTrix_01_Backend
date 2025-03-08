@@ -4,12 +4,12 @@ import { loginUser, registerUser } from '../controllers/authController';
 const router = express.Router();
 
 router.post('/login', (req, res) => {
-    console.log(`Login attempt with username: ${req.body?.email}`);
+    console.log(`Login attempt with username: ${req.body?.username}`);
     loginUser(req, res);
 });
 
-router.post('/register', (req, res) => {
-    console.log(`Register attempt with email: ${req.body?.email}`);
+router.post('/register',(req, res) => {
+    console.log(`Register attempt with username: ${req.body?.username}`);
     registerUser(req, res);
 });
 
